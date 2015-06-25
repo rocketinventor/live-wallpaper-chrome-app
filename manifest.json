@@ -1,15 +1,15 @@
 {
   "name": "ChromeOS live Wallpaper Canvas",
-  "short_name": "Canvas wallpaper"
+  "short_name": "Canvas wallpaper",
   "description": "Just a Chrome Experiment",
   "version": "0.0.1",
   "minimum_chrome_version": "43",
   "permissions": [
     "notifications",
     "videoCapture",
-    "wallpaper"
-    "http://*"
-    "https://*"
+    "wallpaper",
+    "http://*/",
+    "https://*/"
   ],
   "icons": { "128": "128.png" },
   "app": {
