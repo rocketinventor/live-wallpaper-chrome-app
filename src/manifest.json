@@ -1,12 +1,15 @@
 {
-  "name": "Cam Wallpaper",
+  "name": "ChromeOS live Wallpaper Canvas",
+  "short_name": "Canvas wallpaper"
   "description": "Just a Chrome Experiment",
-  "version": "1.2.1",
+  "version": "0.0.1",
   "minimum_chrome_version": "43",
   "permissions": [
     "notifications",
     "videoCapture",
     "wallpaper"
+    "http://*"
+    "https://*"
   ],
   "icons": { "128": "128.png" },
   "app": {
