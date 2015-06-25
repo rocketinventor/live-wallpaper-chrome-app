@@ -64,4 +64,3 @@ function stop() {
     window.close(); // Close background page.
   });
 }
-

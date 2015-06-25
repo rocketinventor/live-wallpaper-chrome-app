@@ -1,7 +1,5 @@
 {
-  "name": "ChromeOS live Wallpaper Canvas",
-  "short_name": "Canvas wallpaper",
-  "description": "Just a Chrome Experiment",
+  "name": "Live wallpaper for Chrome OS",
   "version": "0.0.1",
   "minimum_chrome_version": "43",
   "permissions": [
