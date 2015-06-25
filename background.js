@@ -28,7 +28,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
 
       var video = document.createElement('video');
       video.autoplay = true;
-      video.src = URL.createObjectURL(localStream);
+      video.src = "/TimeScapes.mp4";
       video.addEventListener('loadedmetadata', function() {
   
         var canvas = document.createElement('canvas');
