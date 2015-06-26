@@ -28,7 +28,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
 
       var video = document.createElement('video');
       video.autoplay = true;
-      video.src = "/TimeScapes.mp4";
+      video.src = "/vids/TimeScapes_360p.mp4";
       video.loop = "true";
       video.addEventListener('loadedmetadata', function() {
   
