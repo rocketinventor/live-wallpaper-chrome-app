@@ -21,7 +21,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
     chrome.notifications.create('id', {
       buttons: [{title: 'Stop'}],
       iconUrl: chrome.runtime.getURL('128.png'),
-      message: '',
+      message: "Your live wallpaper is up and running, close this to stop!",
       title: 'Abracadabra!',
       type: 'basic',
     }, function() {
@@ -29,6 +29,7 @@ chrome.app.runtime.onLaunched.addListener(function() {
       var video = document.createElement('video');
       video.autoplay = true;
       video.src = "/TimeScapes.mp4";
+      video.loop = "true";
       video.addEventListener('loadedmetadata', function() {
   
         var canvas = document.createElement('canvas');
@@ -45,9 +46,9 @@ chrome.app.runtime.onLaunched.addListener(function() {
             chrome.wallpaper.setWallpaper({
               data: xhr.response,
               layout: 'STRETCH',
-              filename: 'webcam',
+              filename: 'video_frame',
   	    }, draw);
-          }
+          };
           xhr.send();
         })();
       });
