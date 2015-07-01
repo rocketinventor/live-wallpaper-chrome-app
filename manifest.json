@@ -4,7 +4,6 @@
   "minimum_chrome_version": "43",
   "permissions": [
     "notifications",
-    "videoCapture",
     "wallpaper",
     "http://*/",
     "https://*/"

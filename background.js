@@ -10,58 +10,51 @@ function dataURLtoBlob(dataURL) {
     return blob;
 }
 
-var localStream;
+function stop() {
+  chrome.notifications.clear('id');
+  window.close(); // Close background page.
+}
 
-chrome.app.runtime.onLaunched.addListener(function() {
-
-  navigator.webkitGetUserMedia({video: true},
-      function(stream) {
-
-    localStream = stream;
-    chrome.notifications.create('id', {
-      buttons: [{title: 'Stop'}],
-      iconUrl: chrome.runtime.getURL('128.png'),
-      message: "Your live wallpaper is up and running, close this to stop!",
-      title: 'Abracadabra!',
-      type: 'basic',
-    }, function() {
-
+chrome.app.runtime.onLaunched.addListener(function videoWall() {
+  chrome.notifications.create('id', {
+    buttons: [{title: 'Stop'}],
+    iconUrl: chrome.runtime.getURL('128.png'),
+    message: "Your live wallpaper is up and running, close this to stop!",
+    title: 'Abracadabra!',
+    type: 'basic',
+  }, function() {
       var video = document.createElement('video');
+      video.id = "video";
       video.autoplay = true;
       video.src = "/vids/TimeScapes_360p.mp4";
       video.loop = "true";
       video.addEventListener('loadedmetadata', function() {
-  
-        var canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-
-        (function draw() {
-          canvas.getContext('2d').drawImage(video, 0, 0);
-          var blob = dataURLtoBlob(canvas.toDataURL()); 
-          var xhr = new XMLHttpRequest();
-          xhr.responseType = 'arraybuffer';
-          xhr.open('GET', URL.createObjectURL(blob));
-          xhr.onload = function() {
-            chrome.wallpaper.setWallpaper({
-              data: xhr.response,
-              layout: 'STRETCH',
-              filename: 'video_frame',
-  	    }, draw);
-          };
-          xhr.send();
-        })();
+      var canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.id = "canvas";
+    }, function draw() {
+        canvas = document.getElementsByClassName('canvas')[0];
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        var blob = dataURLtoBlob(canvas.toDataURL()); 
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'arraybuffer';
+        xhr.open('GET', URL.createObjectURL(blob));
+        xhr.onload = function() {
+          chrome.wallpaper.setWallpaper({
+            data: xhr.response,
+            layout: 'STRETCH',
+            filename: 'video_frame',
+          });
+        };
+        xhr.send();
       });
-    });
-  }, function(error) {});
+  });
 });
+
+
 
 chrome.notifications.onButtonClicked.addListener(stop);
 chrome.notifications.onClosed.addListener(stop);
 
-function stop() {
-  chrome.notifications.clear('id', function() {
-    localStream.stop();
-    window.close(); // Close background page.
-  });
-}
+
